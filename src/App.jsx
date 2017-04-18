@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 import Product from './components/Product.jsx';
 import productsList from './productsList.js';
@@ -13,7 +14,7 @@ class App extends React.Component{
     super(props);
 
     this.state = {
-      products: this.props.initialData
+      products: []
     };
 
     this.handleCheck = this.handleCheck.bind(this);
@@ -22,42 +23,66 @@ class App extends React.Component{
     this.handleEdit = this.handleEdit.bind(this);
   }
 
+  componentDidMount() {
+		axios('/api/products')
+			.then(res => res.data)
+			.then(products => this.setState({ products }))
+			.catch(this.handleError)
+	}
+
   handleCheck(id) {
-    let products = this.state.products.map(product => {
-      if(product.id === id) {
-        product.completed = !product.completed;
-      };
-      return product;
-    });
-    this.setState({products});
-  }
+		axios.patch(`/api/products/${id}`)
+			.then(res => {
+				let products = this.state.products.map(product => {
+					if(product.id === id) {
+						product = res.data;
+					}
+					return product;
+				});
+
+				this.setState({products});
+			})
+			.catch(this.handleError);
+	}
 
   handleDelete(id) {
-    let products = this.state.products.filter(product => {
-      return product.id !== id;
-    });
-    this.setState({products});
-  }
+		axios.delete(`/api/products/${id}`)
+			.then(() => {
+				let products = this.state.products.filter(product => product.id !== id);
+				this.setState({products});
+			})
+			.catch(this.handleError);
+	}
 
   handleAdd(title) {
-    let product = {
-      id: this.state.products.length + 1,
-      title,
-      comleted: false
-    };
-    let products = [...this.state.products, product]
-    this.setState({products});
-  }
+		axios.post('/api/products', { title })
+			.then(res => res.data)
+			.then(product => {
+				let products = [...this.state.products, product];
+				this.setState({ products });
+			})
+			.catch(this.handleError);
+	}
 
   handleEdit(id, title) {
-    let products = this.state.products.map(product => {
-      if(product.id === id) {
-        product.title = title
-      };
-      return product;
-    });
-    this.setState({products});
-  }
+		axios.put(`/api/products/${id}`, {title})
+			.then(res => {
+				if(title != '') {
+					let products = this.state.products.map(product => {
+						if(product.id === id) {
+							product = res.data;
+						};
+						return product;
+					});
+					this.setState({products});
+				}
+			})
+			.catch(this.handleError);
+	}
+
+  handleError(error) {
+		console.error(error);
+	}
 
   render() {
     return (
