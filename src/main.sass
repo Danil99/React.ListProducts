@@ -1,0 +1,146 @@
+h1, h2, h3, h4, span, a, a:hover, a:focus, ul, li, button
+  margin: 0
+  padding: 0
+
+a, a:hover, a:focus, button
+  text-decoration: none
+  outline: none
+
+body
+  font-family: Arial, sans-serif
+  box-sizing: border-box
+
+main
+  width: 550px
+  margin: 50px auto 0
+  border-radius: 10px 10px 5px 5px
+  overflow: hidden
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12)
+
+header
+  width: 100%
+  text-align: center
+  background-color: #333
+  color: #ddd
+  padding: 15px 0
+  border-radius: 10px 10px 0 0
+
+.list-products
+  width: 100%
+  -webkit-user-select: none
+  user-select: none
+
+.list-products .product, form.aditing
+  background-color: #fff
+  color: #333
+  padding: 14px 15px
+  font-size: 17px
+  display: -webkit-flex
+  display: -ms-flex
+  display: flex
+  align-items: center
+  border-bottom: 1px solid rgba(0,0,0,.12)
+  position: relative
+
+.list-products .product:last-child
+  border-bottom: 0
+
+.list-products .product.completed *
+  color: #999
+
+.list-products .product.completed span
+  text-decoration: line-through
+
+.list-products button.icon
+  background-color: transparent
+  font-size: 18px
+  width: 20px
+  height: 20px
+  border-radius: 50%
+  border: 0
+
+.list-products button.icon .fa
+  float: left
+  transition: all .25s ease
+
+.list-products button.icon .fa:hover
+  transform: scale(1.15)
+  cursor: pointer
+
+.list-products .product button.icon.delete
+  position: absolute
+  right: 15px
+
+.list-products .product button.icon.edit
+  position: absolute
+  right: 43px
+
+.list-products  button.icon.save
+  margin-left: 10px
+  margin-right: 31px
+
+.list-products .product button.icon.edit .fa
+  float: none
+
+.list-products .product button.icon.edit .fa:hover
+  transform: none
+  font-size: 21px
+
+form.addh
+  display: -webkit-flex
+  display: -ms-flex
+  display: flex
+  align-items: center
+  background-color: #FAFAFA
+  border-top: 1px solid rgba(0,0,0,.1)
+  padding: 10px
+
+form.addh input
+  color: #757575
+  padding: 0 10px
+  height: 30px
+  border-radius: 2px
+  border: 1px solid lightgray
+  outline: none
+  flex: 1
+  transition: all .2s
+  font-size: 15px
+
+form.addh input:focus
+  border: 1px solid #00d8ff
+
+form.addh button.add
+  transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1)
+  background-color: #f1f1f1
+  width: 100px
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12)
+  border: 0
+  font-size: 14px
+  margin-left: 10px
+  text-transform: uppercase
+  height: 30px
+  cursor: pointer
+
+form.aditing
+  padding: 8px 10px
+
+form.aditing input
+  color: #757575
+  padding: 0 10px
+  height: 29px
+  border-radius: 2px
+  border: 1px solid lightgray
+  outline: none
+  flex: 1
+  transition: all .2s
+  font-size: 15px
+  width: calc(100% - 50px)
+
+form.addh button.add:hover
+  background-color: rgba(158,158,158,.2)
+
+form.addh button.add:active
+  background-color: rgba(158,158,158,.4)
+
+.list-products .product span
+  margin-left: 10px
